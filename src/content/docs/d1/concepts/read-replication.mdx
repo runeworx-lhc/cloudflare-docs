@@ -1,0 +1,24 @@
+---
+title: D1 read replication
+pcx_content_type: concept
+sidebar:
+  order: 2
+
+---
+
+import { GlossaryTooltip } from "~/components"
+
+D1 read replication is a feature which reduces the <GlossaryTooltip term = "request latency">request latency</GlossaryTooltip> for read requests for users who may be located far away from the <GlossaryTooltip term="primary database instance">primary database instance</GlossaryTooltip>.
+
+## Primary database instance vs read replicas
+
+When using D1 without read replication, D1 routes all queries (both read and write) to a specific database instance in [one location in the world](/d1/configuration/data-location/), known as the primary database instance. The request latency is dependent on the physical closeness of a user to the primary database instance - it takes less time for light (information) to travel between the user and the primary database instance if that distance is shorter. Users located further away from this database instance experience the longest request latency.
+
+When using read replication, D1 introduces multiple “almost up-to-date” copies of the primary database instance which only serve read requests, called <GlossaryTooltip term="read replica"> read replicas </GlossaryTooltip>. D1 creates the read replicas in multiple regions throughout the world [across the Cloudflare network](/d1/concepts/read-replication/#read-replica-locations).
+
+A user may be located far away from the primary database instance but close to a read replica. By sending their read requests to the read replica instead of the primary database instance, the user enjoys shorter read request response times. For example, the request latency when using the primary database instance may be 250 ms, versus 20 - 50 ms when using a read replica.
+
+:::note
+All write requests are still forwarded to the primary database instance. Read replication only improves the query response time for read requests.
+:::
+

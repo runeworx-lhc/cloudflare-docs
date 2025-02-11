@@ -1,0 +1,14 @@
+---
+productName: D1
+entries:
+  - term: primary database instance
+    general_definition: |-
+      the primary database instance is the original instance of a database. This database instance only exists in one location in the world.
+
+  - term: request latency
+    general_definition: |-
+      the request latency is the time it takes for a request from a user to be returned by D1.
+
+  - term: read replica
+    general_definition: |-
+      a read replica is an “almost up-to-date” copy of the primary database instance which only serve read requests. There may be multiple read replicas for a single primary database instance.
