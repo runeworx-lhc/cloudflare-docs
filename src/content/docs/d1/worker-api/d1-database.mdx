@@ -242,3 +242,24 @@ return new Response(dump, {
 #### Return values
 
 - None.
+
+### `withSession`
+
+Starts a D1 Session which activates read replication.
+
+```js
+const session = env.DB.withSession("<constraint> or bookmark");
+```
+
+#### Parameters
+
+- <code>condition</code>: <Type text="String"/><MetaInfo text="Optional"/>
+  - The starting condition for the D1 Session. `<constraint>` can be one of:
+    - `first-primary`: Directs the first query in the Session (whether read or write) to the primary database instance. This option is useful if you need to start the Session with the most up-to-date data from the primary database instance.
+    - `first-unconstrained`: Directs the first query in the Session (whether read or write) to any database instance. This option is useful if you do not need to start the Session with the most up-to-date data, and wish to prioritize minimizing query latency from the very start of the Session.
+
+- <code>bookmark</code>: <Type text="String?"/><MetaInfo text="Optional"/>
+  - A [`bookmark`](/d1/reference/time-travel/#bookmarks) from an existing D1 Session. This allows you to continue the existing Session using the `bookmark` as a reference point.
+
+#### Return values
+
