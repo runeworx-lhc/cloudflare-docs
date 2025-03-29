@@ -55,7 +55,17 @@ Once authenticated, you'll be able to see your tools by clicking the tools icon 
 
 ## Connect your remote MCP server to Cursor
 
-To connect [Cursor](https://www.cursor.com/) with your remote MCP server, choose `Type`: "Command" and in the `Command` field, combine the command and args fields into one (e.g.`npx mcp-remote https://your-worker-name.your-account.workers.dev/sse`).
+To connect [Cursor](https://www.cursor.com/) with your remote MCP server, add the following to your [`.cursor/mcp.json` configuration](https://docs.cursor.com/context/model-context-protocol):
+
+```json
+{
+  "mcpServers": {
+    "server-name": {
+      "command": "npx mcp-remote https://my-worker.account.workers.dev/sse"
+    }
+  }
+}
+```
 
 ## Connect your remote MCP server to Windsurf
 
