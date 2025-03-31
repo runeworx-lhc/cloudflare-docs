@@ -66,11 +66,26 @@ Once you create your Pipeline, you will receive a HTTP endpoint which you can po
 
 ```sh output
 🌀 Authorizing R2 bucket "[R2-BUCKET-NAME]"
-🌀 Creating pipeline named "[PIPELINE-NAME]"
-✅ Successfully created pipeline [PIPELINE-NAME] with ID [PIPELINE-ID]
+Opening a link in your default browser: https://oauth.pipelines.cloudflare.com/oauth/login?accountId=<ACCOUNT_ID>&bucketName=[R2-BUCKET-NAME]&pipelineName=[PIPELINE-NAME]
+🌀 Checking access to R2 bucket "[R2-BUCKET-NAME]"
+🌀 Creating Pipeline named "[PIPELINE-NAME]"
+✅ Successfully created Pipeline "[PIPELINE-NAME]" with id [PIPELINE-ID]
+🎉 You can now send data to your Pipeline!
 
-You can now send data to your pipeline with:
-  curl "https://<PIPELINE-ID>.pipelines.cloudflare.com/" -d '[{ "foo":"bar }]'
+To start interacting with this Pipeline from a Worker, open your Worker’s config file and add the following binding configuration:
+
+{
+  "pipelines": [
+    {
+      "pipeline": "[PIPELINE-NAME]",
+      "binding": "PIPELINE"
+    }
+  ]
+}
+
+Send data to your Pipeline's HTTP endpoint:
+
+  curl "https://<PIPELINE_ID>.pipelines.cloudflare.com" -d '[{"foo": "bar"}]
 ```
 
 ## 3. Post data to your pipeline

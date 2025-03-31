@@ -1,5 +1,5 @@
 ---
-updated: 2025-03-03
+updated: 2025-03-31
 difficulty: Intermediate
 content_type: 📝 Tutorial
 pcx_content_type: tutorial
@@ -48,7 +48,7 @@ Create a new Worker project by running the following commands:
     	product="workers"
     	params={{
     	category: "hello-world",
-    	type: "Hello World Worker",
+    	type: "Worker + Assets",
     	lang: "TypeScript",
     	}}
     />
@@ -59,20 +59,9 @@ Navigate to the `e-commerce-pipelines-client-side` directory:
 cd e-commerce-pipelines-client-side
 ```
 
-## 2. Create the front-end
+## 2. Update the front-end
 
-Using Static Assets, you can serve the frontend of your application from your Worker. To use Static Assets, you need to add the required bindings to your `wrangler.toml` file.
-
-<WranglerConfig>
-
-```toml
-[assets]
-directory = "public"
-```
-
-</WranglerConfig>
-
-Next, create a `public` directory and add an `index.html` file. The `index.html` file should contain the following HTML code:
+Using Static Assets, you can serve the frontend of your application from your Worker. The above step creates a new Worker project with a default `public/index.html` file. Update the `public/index.html` file with the following HTML code:
 
 <details>
 	<summary>Select to view the HTML code</summary>
