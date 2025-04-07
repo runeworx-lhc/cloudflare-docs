@@ -10,7 +10,7 @@
 | --------------------------------------- | :---------------------: | :--------------------: |
 | **AI**                                  |         ✅[^1]          |           ✅           |
 | **Assets**                              |           ✅            |           ✅           |
-| **Analytics Engine**                    |           ✅            |           ✅           |
+| **Analytics Engine**                    |           ✅[^4]         |           ✅           |
 | **Browser Rendering**                   |           ❌            |           ✅           |
 | **D1**                                  |           ✅            |           ✅           |
 | **Durable Objects**                     |           ✅            |           ✅           |
@@ -31,6 +31,8 @@
 [^2]: Using Hyperdrive with local development allows you to connect to a local database (running on `localhost`) but you cannot connect to a remote database. To connect to a remote database, use `wrangler dev --remote`.
 
 [^3]: Using Vectorize always accesses your Cloudflare account to run queries, and will incur usage charges even in local development.
+
+[^4]: Analytics Engine is supported in local development with Wrangler but is not currently supported in the Vite plugin.
 
 > **Tip:** If you need to use any bindings marked with ❌ under local development, run:
 >
