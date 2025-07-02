@@ -16,8 +16,8 @@ You can connect Hyperdrive to any existing PlanetScale PostgreSQL database by cr
    2. Generate a secure password.
    3. Run the following snippet to create a new role `hyperdrive-user` in your database:
    ```sql
-   CREATE ROLE hyperdrive-user WITH LOGIN PASSWORD '<ENTER_PASSWORD_HERE>';
-   GRANT INSERT, UPDATE, SELECT, DELETE ON ALL TABLES IN SCHEMA public TO hyperdrive-user;
+   CREATE ROLE "hyperdrive-user" WITH LOGIN PASSWORD '<ENTER_PASSWORD_HERE>';
+   GRANT INSERT, UPDATE, SELECT, DELETE ON ALL TABLES IN SCHEMA public TO "hyperdrive-user";
    ```
 3. Note the user, the password, the database host, and the database name. You will need these to create a database configuration in Hyperdrive.
 
