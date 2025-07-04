@@ -15,7 +15,7 @@ A complete guide to building a streaming AI chat agent with tool integration usi
 
 ## Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 - Cloudflare account
 - OpenAI API key
@@ -41,14 +41,14 @@ You have two options for setting up your OpenAI API key:
 
 ```json
 {
-  "compatibility_date": "2024-09-23",
-  "compatibility_flags": ["nodejs_compat"],
-  "vars": {
-    "OPENAI_API_KEY": "your-openai-api-key-here"
-  },
-  "define": {
-    "process.env.NODE_ENV": "\"production\""
-  }
+	"compatibility_date": "2024-09-23",
+	"compatibility_flags": ["nodejs_compat"],
+	"vars": {
+		"OPENAI_API_KEY": "your-openai-api-key-here"
+	},
+	"define": {
+		"process.env.NODE_ENV": "\"production\""
+	}
 }
 ```
 
@@ -56,6 +56,14 @@ You have two options for setting up your OpenAI API key:
 
 ```bash
 echo "OPENAI_API_KEY=your-key-here" > .dev.vars
+
+```
+
+**⚠️ Security Best Practice**: For production deployments, use Cloudflare secrets instead of putting API keys in `wrangler.jsonc`:
+
+```bash
+# Set the OpenAI API key as a secret (recommended for production)
+wrangler secret put OPENAI_API_KEY
 ```
 
 ## Step 3: Test the agent locally
@@ -96,10 +104,10 @@ The main agent class that handles chat interactions:
 import { AIChatAgent } from "agents/ai-chat-agent";
 
 export class Chat extends AIChatAgent<Env> {
-  async onChatMessage(onFinish, options) {
-    // Handles incoming messages and manages streaming responses
-    // Processes tool calls and generates AI responses
-  }
+	async onChatMessage(onFinish, options) {
+		// Handles incoming messages and manages streaming responses
+		// Processes tool calls and generates AI responses
+	}
 }
 ```
 
@@ -117,18 +125,18 @@ import { z } from "zod";
 
 // Automatic execution (no confirmation needed)
 const getLocalTime = tool({
-  description: "get the local time for a specified location",
-  parameters: z.object({ location: z.string() }),
-  execute: async ({ location }) => {
-    return "10am";
-  },
+	description: "get the local time for a specified location",
+	parameters: z.object({ location: z.string() }),
+	execute: async ({ location }) => {
+		return "10am";
+	},
 });
 
 // Requires confirmation (no execute function)
 const getWeatherInformation = tool({
-  description: "show the weather in a given city to the user",
-  parameters: z.object({ city: z.string() }),
-  // Omitting execute function makes this tool require human confirmation
+	description: "show the weather in a given city to the user",
+	parameters: z.object({ city: z.string() }),
+	// Omitting execute function makes this tool require human confirmation
 });
 ```
 
@@ -145,20 +153,20 @@ const getWeatherInformation = tool({
 ```ts
 // In src/tools.ts
 const getWeather = tool({
-  description: "Get current weather for a location",
-  parameters: z.object({
-    location: z.string().describe("The city name"),
-  }),
-  execute: async ({ location }) => {
-    // Call weather API
-    return `The weather in ${location} is sunny and 72°F`;
-  },
+	description: "Get current weather for a location",
+	parameters: z.object({
+		location: z.string().describe("The city name"),
+	}),
+	execute: async ({ location }) => {
+		// Call weather API
+		return `The weather in ${location} is sunny and 72°F`;
+	},
 });
 
 // Add to exports
 export const tools = {
-  // ... existing tools
-  getWeather,
+	// ... existing tools
+	getWeather,
 };
 ```
 
@@ -171,26 +179,26 @@ export const tools = {
 ```ts
 // In src/tools.ts
 const sensitiveAction = tool({
-  description: "Perform a sensitive action",
-  parameters: z.object({
-    action: z.string().describe("The action to perform"),
-    reason: z.string().describe("Reason for the action"),
-  }),
-  // Omitting execute function makes this tool require human confirmation
+	description: "Perform a sensitive action",
+	parameters: z.object({
+		action: z.string().describe("The action to perform"),
+		reason: z.string().describe("Reason for the action"),
+	}),
+	// Omitting execute function makes this tool require human confirmation
 });
 
 // Add to exports
 export const tools = {
-  // ... existing tools
-  sensitiveAction,
+	// ... existing tools
+	sensitiveAction,
 };
 
 // Add execution function
 export const executions = {
-  // ... existing executions
-  sensitiveAction: async ({ action, reason }) => {
-    return `Action "${action}" completed successfully. Reason: ${reason}`;
-  },
+	// ... existing executions
+	sensitiveAction: async ({ action, reason }) => {
+		return `Action "${action}" completed successfully. Reason: ${reason}`;
+	},
 };
 ```
 
@@ -243,17 +251,21 @@ wrangler secret put OPENAI_API_KEY
 ### Common issues
 
 **"OPENAI_API_KEY is not set"**
+
 - Make sure you've set the API key in `.dev.vars` or `wrangler.jsonc`
 - For production, use `wrangler secret put OPENAI_API_KEY`
 
 **"npm run dev" not found**
+
 - Use `npm start` instead (the script is named "start")
 
 **Server not accessible**
+
 - Check that the server is running on port 5174 (not 8787)
 - Look for the correct URL in the terminal output
 
 **Tool execution errors**
+
 - Make sure tools are properly exported in `tools` object
 - Check that confirmation-required tools have execution functions in `executions`
 
