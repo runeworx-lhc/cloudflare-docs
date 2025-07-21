@@ -5,18 +5,44 @@ sidebar:
   order: 12
 
 ---
+import { Steps, Details } from "~/components"
+
+In addition to following the live stream troubleshooting steps in this guide, make sure that your video settings align with [Cloudflare live stream recommendations](/stream/stream-live/start-stream-live/#recommendations-requirements-and-limitations). If you use OBS, you can also check these [OBS-specific recommendations](/stream/examples/obs-from-scratch/#6-optional-optimize-settings).
 
 ## Buffering, freezing, and latency
 
-If your live stream is buffering, freezing, experiencing latency issues, switching in quality levels, or having other similar issues, take these steps.
+If your live stream is buffering, freezing, experiencing latency issues, switching in quality levels, or having other similar issues, try these troubleshooting steps:
 
+<Steps>
 1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com) > **Stream** > **Analytics**.
 
-2. Look at your **Keyframe Interval** chart. It should be a consistent flat line that stays between 2s and 6s. If instead you see:
-	* An inconsistent or wavy line
-	* A line that is consistency below 2s or above 6s
+2. Look at your **Keyframe Interval** chart.
 
+	It should be a consistent flat line that stays between 2s and 6s. If instead you see an inconsistent or wavy line a line, or a line that is consistently below 2s or above 6s, edit the keyframe interval (also called GOP) in your software or service used send the stream to Cloudflare. The exact steps for editing those settings will depend on your platform.
+		* If the keyframe interval or GOP is below 2s, raise it to 2s.
+		* If it is above 4s, lower it to 4s.
+		* If the keyframe interval is "variable", change it to a specific number, like 4s.
 
+	<Details header="What is a keyframe interval?">
+	The keyframe interval (also called GOP) is ________.
+	</Details>
+
+3. Look at your **Upload-to-Duration Ratio** chart.
+
+	It should be a consistent flat line between 50% and 70%. If instead you see an inconsistent or wavy line, or a line that is consistently below 50% or above 70%, try the following troubleshooting steps:
+
+	* Check that your internet speed upload bandwidth is between 2Mbps and 12Mbps.
+		* If it is below 2Mbps, your internet connection is very slow. Use common troubleshooting steps such as restarting your router, using an Ethernet connection instead of Wi-Fi, or contacting your internet service provider.
+		* If it is above 12Mbps, try adjusting your video bitrate to be between 50% and 70% of your internet speed. To do so, edit the bitrate setting in your software or service you use to send the stream to Cloudflare. If the bitrate is "variable", change it to a specific number between 50% and 70% of your internet speed.
+	<br/>
+	* Follow the steps above (in step 2) to edit the keyframe interval in the software or service you use to send the stream to Cloudflare.
+
+	<Details header="What is an upload-to-duration ratio?">
+	The upload-to-duration ratio measures ________.
+	</Details>
+</Steps>
+
+## Error codes for live stream
 
 
 
