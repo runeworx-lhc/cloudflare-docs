@@ -13,48 +13,19 @@ The latest releases of [@cloudflare/agents] (https://github.com/cloudflare/agent
 ### Lightweight .queue for fast task deferral
 
 You can use .queue() to enqueue background work — ideal for tasks like processing user messages, sending notifications etc.
-Here's a full example using .queue() inside a tool, with batching and concurrency control:
 
 ```ts
-const queueMessage = tool({
-	description: "Queue a message to be processed by the agent",
-	parameters: z.object({
-		message: z.string().describe("The message to process"),
-		priority: z
-			.enum(["low", "normal", "high"])
-			.default("normal")
-			.describe("Priority level for the message"),
-	}),
-	execute: async ({ message, priority = "normal" }) => {
-		const { agent } = getCurrentAgent<Chat>();
-
-		if (!agent) {
-			return "Error: Agent not available";
-		}
-
-		try {
-			// Create a batch of 100 messages
-			const batchNumbers = Array.from({ length: 100 }, (_, i) => i + 1);
-
-			const taskIds = await pMap(
-				batchNumbers,
-				async (i) => {
-					return agent.queue("processMessage", {
-						message: `${message} (batch ${i}/100)`,
-						priority,
-					});
-				},
-				{ concurrency: 6 }, // Run up to 6 queues in parallel
-			);
-
-			return `Queued 100 messages. Example Task IDs: ${taskIds.slice(0, 5).join(", ")}...`;
-		} catch (error) {
-			console.error("Error queueing message", error);
-			return `Error queueing message: ${error}`;
-		}
-	},
-});
-```
+class MyAgent extends Agent{
+  doSomethingExpensive(payload){
+    // a long running process that you want to run in the background 
+  }
+  
+  queueSomething(){
+    await this.queue('doSomethingExpensive', somePayload); // this will NOT block further execution, and runs in the background 
+    await this.queue('doSomethingExpensive', someOtherPayload); // the callback will NOT run until the previous callback is complete 
+    // ... call as many times as you want
+  }
+}
 
 Notes:
 
