@@ -23,7 +23,6 @@ export const baseSchema = ({ image }: SchemaContext) =>
 			),
 		pcx_content_type: z
 			.union([
-				z.literal("api"),
 				z.literal("changelog"),
 				z.literal("changelog-entry"),
 				z.literal("configuration"),
@@ -41,6 +40,7 @@ export const baseSchema = ({ image }: SchemaContext) =>
 				z.literal("reference"),
 				z.literal("reference-architecture"),
 				z.literal("reference-architecture-diagram"),
+				z.literal("release-notes"),
 				z.literal("troubleshooting"),
 				z.literal("tutorial"),
 				z.literal("video"),
