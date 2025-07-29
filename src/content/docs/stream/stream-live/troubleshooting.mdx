@@ -24,7 +24,7 @@ If your live stream is buffering, freezing, experiencing latency issues, switchi
 		* If the keyframe interval is "variable", change it to a specific number, like 4s.
 
 	<Details header="What is a keyframe interval?">
-	The keyframe interval (also called GOP) is ________.
+	The keyframe interval (also called GOP) is a measurement of how often keyframes are sent to Stream. A shorter keyframe is less likely to cause buffering or freezing, but requires more internet bandwidth. A longer keyframe is more likely to cause buffering or freezing, but requires less internet bandwidth.
 	</Details>
 
 3. Look at your **Upload-to-Duration Ratio** chart.
@@ -38,7 +38,7 @@ If your live stream is buffering, freezing, experiencing latency issues, switchi
 	* Follow the steps above (in step 2) to edit the keyframe interval in the software or service you use to send the stream to Cloudflare.
 
 	<Details header="What is an upload-to-duration ratio?">
-	The upload-to-duration ratio measures ________.
+	The upload-to-duration ratio is a measurement of your video duration relative to how fast it is taking to upload. A ratio of 50% to 70% means that your video is uploading faster than its duration, and should not experience buffering or freezing.	A ratio of 100% or more means that your video length is longer than the speed it is taking to upload, and is likely to experience buffering and freezing. A ratio of less than 50% means that your video is uploading much faster than its duration, but may require more internet bandwidth, which can also lead to buffering and freezing.
 	</Details>
 </Steps>
 
