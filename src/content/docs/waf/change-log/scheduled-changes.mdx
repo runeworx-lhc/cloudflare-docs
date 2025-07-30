@@ -1,61 +1,12 @@
 ---
-type: table
-pcx_content_type: release-notes
 title: Scheduled changes
 sidebar:
   order: 2
 tableOfContents: false
 ---
 
-import { RSSButton, RuleID } from "~/components";
+import { ProductChangelog } from "~/components";
 
-<RSSButton href="/waf/change-log/index.xml" />
+<ProductChangelog product="waf" scheduled />
 
-<table style="width: 100%">
-  <thead>
-    <tr>
-      <th>Announcement Date</th>
-      <th>Release Date</th>
-      <th>Release Behavior</th>
-      <th>Legacy Rule ID</th>
-      <th>Rule ID</th>
-      <th>Description</th>
-      <th>Comments</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>2025-07-07</td>
-			<td>2025-07-14</td>
-			<td>Log</td>
-			<td>100798</td>
-			<td>
-				<RuleID id="a8918353372b4191b10684eb2aa3d845" />
-			</td>
-			<td>XSS - Attribute Overloading</td>
-			<td>This is a New Detection</td>
-    </tr>
-    <tr>
-      <td>2025-07-07</td>
-      <td>2025-07-14</td>
-			<td>Log</td>
-			<td>100799</td>
-			<td>
-				<RuleID id="31dd299ba375414dac9260c037548d06" />
-			</td>
-			<td>XSS - OnToggle</td>
-			<td>This is a New Detection</td>
-    </tr>
-    <tr>
-      <td>2025-07-07</td>
-      <td>2025-07-14</td>
-			<td>Log</td>
-			<td>100800</td>
-			<td>
-				<RuleID id="7663ea44178441a0b3205c145563445f" />
-			</td>
-			<td>SQLi - Obfuscated Boolean</td>
-			<td>This is a New Detection</td>
-    </tr>
-  </tbody>
-</table>
+For other WAF updates, refer to the [changelog](/changelog/?product=waf).
