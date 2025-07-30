@@ -1,77 +1,91 @@
 ---
-title: Get started with Turnstile
+title: Get started
 pcx_content_type: get-started
 sidebar:
   order: 4
-  group:
-    label: Get started
+---
+
+
+import { GlossaryTooltip, Render, LinkButton } from "~/components"
+
+This guide will get you started on setting up the Turnstile widget to protect your website from bots while maintaining a seamless user experience.
+
+## Prerequisites
+
+Before you begin, you must have: 
+
+- A Cloudflare account
+- A website or web application to protect
+- Basic knowledge of HTML and your preferred server-side language
 
 ---
 
-import { GlossaryTooltip, Render } from "~/components"
+## Implementation
 
-This guide will get you started on setting up the Turnstile widget.
+Implementing Turnstile involves two essential components that work together:
 
-If you are currently using a <GlossaryTooltip term="CAPTCHA">CAPTCHA</GlossaryTooltip> service, you can copy and paste our script wherever you have deployed the existing script today.
+1. **Client-side**: Embed the widget
 
-## Get a sitekey and secret key
+    Add the Turnstile widget to your webpage to challenge visitors and generate verification tokens.
 
-To start using the Turnstile widget, you will need to obtain a <GlossaryTooltip term="sitekey">sitekey</GlossaryTooltip> and a <GlossaryTooltip term="secret key">secret key</GlossaryTooltip>. The sitekey and secret key are always associated with one widget and cannot be reused for other widgets.
+2. **Server-side**: Validate the response
 
-The sitekey is public and used to invoke the Turnstile widget on your site.
+    Verify the tokens on your server using the Siteverify API to ensure they are authentic and have not been tampered with.
 
-The sitekey and secret key are generated upon the creation of a widget, allowing communication between your site and Cloudflare to verify responses for a solved challenge from Turnstile. Make sure you keep the secret key safe for security reasons.
+Refer to [Implementation path](/turnstile/get-started/#implementation-path) below for guidance on how to implement Turnstile to your website.
 
-:::note
+---
 
-You can find special sitekeys to be used for testing in the [testing](/turnstile/troubleshooting/testing/) section.
-:::
+## Key security requirements
 
-### New sites
+Mandatory server-side validation
 
-1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/turnstile) and select your account.
-2. Go to **Turnstile**.
-3. Select **Add widget** and fill out the site name and [your website's hostname or select from your existing websites](/turnstile/concepts/hostname-management/) on Cloudflare.
-4. Select the widget mode.
-5. (Optional) Opt in for [pre-clearance support](/turnstile/concepts/pre-clearance-support/).
-6. Copy your sitekey and secret key.
+- It is critical to enforce Turnstile tokens with the Siteverify API. The Turnstile token could be invalid, expired, or already redeemed. Not verifying the token will leave major vulnerabilities in your implementation. You must call Siteverify to complete your Turnstile configuration. Otherwise, it is incomplete and will result in zeroes for token validation when viewing your metrics in [Turnstile Analytics](/turnstile/turnstile-analytics/).
 
-### Existing sites
+Token lifecycle
 
-1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/turnstile) and select your account.
-2. Go to **Turnstile**.
-3. In the widget overview, select **Settings**.
-4. Confirm the [hostnames](/turnstile/concepts/hostname-management/) configured.
-5. (Optional) Opt in for [pre-clearance support](/turnstile/concepts/pre-clearance-support/).
-6. Copy your sitekey and secret key.
+- Tokens expire after 300 seconds (5 minutes). Each token can only be validated once. Expired or used tokens must be replaced with fresh challenges.
 
-## Add the Turnstile widget to your site
+---
 
-To add the Turnstile widget:
+## Implementation path
 
-1. Insert the Turnstile script snippet in your HTML's `<head>` element:
+Follow the steps below to implement Turnstile.
 
-<div>
+### 1. Create your widget
 
-```html
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-```
+First, you must create a Turnstile widget to get your sitekey and secret key.
 
-</div>
+Select your preferred method:
 
-2. [Render the client-side integration](/turnstile/get-started/client-side-rendering/)
 
-   - [Explicit rendering](/turnstile/get-started/client-side-rendering/#explicitly-render-the-turnstile-widget)
-   - [Implicit rendering](/turnstile/get-started/client-side-rendering/#implicitly-render-the-turnstile-widget)
+<LinkButton href="/">Cloudflare dashboard</LinkButton>
 
-## Validate the server-side response
+<LinkButton href="/">API</LinkButton>
 
-<Render file="siteverify-warning" />
+<LinkButton href="/">Terraform</LinkButton>
 
-After you have installed the Turnstile widget on your site, you must configure your server to validate the Turnstile response.
-Refer to [Server-side validation](/turnstile/get-started/server-side-validation/).
+### 2. Embed the widget
 
-:::note
+Add the Turnstile widget to your webpage forms and applications.
 
-Rendering the client-side integration & validating the server-side response are both necessary to allow Turnstile to function properly.
-:::
+Refer to [Embed the widget] to learn more about implicit and explicit rendering methods
+
+### 3. Validate tokens
+
+Implement server-side validation to verify the tokens generated by your widgets.
+
+Refer to [Validate the tokens] to secure your implementation with proper token verification.
+
+## Additional implementation options
+
+### Mobile configuration
+
+Special considerations are necessary for mobile applications and WebView implementations. Refer to [Mobile implementation]() for more information on mobile application integration.
+
+### Migration from other CAPTCHAs
+
+If you are currently using reCAPTCHA, hCaptcha, or another CAPTCHA service, Turnstile can be a drop-in replacement. You can copy and paste our script wherever you have deployed the existing script today.
+
+Refer to [Migration](/turnstile/migration/) for step-by-step migration guidance from other CAPTCHA services.
+
