@@ -18,27 +18,29 @@ If your live stream is buffering, freezing, experiencing latency issues, switchi
 
 2. Look at your **Keyframe Interval** chart.
 
-	It should be a consistent flat line that stays between 2s and 6s. If instead you see an inconsistent or wavy line a line, or a line that is consistently below 2s or above 6s, edit the keyframe interval (also called GOP interval) in your software or service used send the stream to Cloudflare. The exact steps for editing those settings will depend on your platform.
-		* If the keyframe interval or GOP interval is below 2s, raise it to 2s.
-		* If it is above 4s, lower it to 4s.
-		* If the keyframe interval is "variable", change it to a specific number, like 4s.
+	It should be a consistent flat line that stays between 2s and 8s. If instead you see an inconsistent or wavy line a line, or a line that is consistently below 2s or above 8s, edit the keyframe interval (also called GOP size) in your software or service used send the stream to Cloudflare. The exact steps for editing those settings will depend on your platform.
+		* Start by setting the keyframe interval to 4 seconds.
+		* If the keyframe interval is "variable" or "automatic", change it to a specific number instead.
+		* If playback is stable but latency is too high, lower it to 2 seconds.
+		* If there is buffering and freezing in playback, increase it to 8 seconds.
 
 	<Details header="What is a keyframe interval?">
-	The keyframe interval (also called GOP interval) is a measurement of how often keyframes are sent to Stream. A shorter keyframe is less likely to cause buffering or freezing, but requires more internet bandwidth. A longer keyframe is more likely to cause buffering or freezing, but requires less internet bandwidth.
+	The keyframe interval (also called GOP interval) is a measurement of how often keyframes are sent to Stream. A shorter keyframe is requires more internet bandwidth on the broadcast side but can reduce glass-to-glass latency. A longer keyframe can reduce buffering or freezing at the expense of increasing glass-to-glass latency, and it requires less bandwidth.
 	</Details>
 
 3. Look at your **Upload-to-Duration Ratio** chart.
 
-	It should be a consistent flat line between 50% and 70%. If instead you see an inconsistent or wavy line, or a line that is consistently below 50% or above 70%, try the following troubleshooting steps:
+	It should be a consistent flat line below 90%. If instead you see an inconsistent or wavy line, or a line that is consistently above 100%, try the following troubleshooting steps:
 
-	* Check that your internet speed upload bandwidth is between 2Mbps and 12Mbps.
-		* If it is below 2Mbps, your internet connection is very slow. Use common troubleshooting steps such as restarting your router, using an Ethernet connection instead of Wi-Fi, or contacting your internet service provider.
-		* If it is above 12Mbps, try adjusting your video bitrate to be between 50% and 70% of your internet speed. To do so, edit the bitrate setting in your software or service you use to send the stream to Cloudflare. If the bitrate is "variable", change it to a specific number between 50% and 70% of your internet speed.
+	* If the bitrate is "variable", change it to "constant," with a specific number like 8Mbps.
+	* [Check that your internet upload bandwidth](https://speed.cloudflare.com/) is at least 20Mbps.
+		* If it is below 20Mbps, use common troubleshooting steps such as restarting your router, using an Ethernet connection instead of Wi-Fi, or contacting your internet service provider.
+		* If it is above 20Mbps, try adjusting your video bitrate to be no more than 10Mbps or 70% of your internet speed, which ever is lower. To do so, edit the bitrate setting in your software or service you use to send the stream to Cloudflare.
 	<br/>
-	* Follow the steps above (in step 2) to edit the keyframe interval in the software or service you use to send the stream to Cloudflare.
+	* Follow the steps above (in step 2) to _increase_ the keyframe interval in the software or service you use to send the stream to Cloudflare.
 
 	<Details header="What is an upload-to-duration ratio?">
-	The upload-to-duration ratio is a measurement of your video duration relative to how fast it is taking to upload. A ratio of 50% to 70% means that your video is uploading faster than its duration, and should not experience buffering or freezing.	A ratio of 100% or more means that your video length is longer than the speed it is taking to upload, and is likely to experience buffering and freezing. A ratio of less than 50% means that your video is uploading much faster than its duration, but may require more internet bandwidth, which can also lead to buffering and freezing.
+	The upload-to-duration ratio is a measurement of how long it takes to upload a part of your stream compared to how long that part would take to play. A ratio of less than 100% means that your stream is uploading faster than it would take to play, so it should not experience buffering or freezing for most users. A ratio of 100% or more means that your video is uploading slower than it would take to play, and is likely to experience buffering and freezing for most viewers.
 	</Details>
 </Steps>
 
@@ -62,7 +64,3 @@ If you receive any of the above error codes while live streaming videos:
 3.
 </Steps>
 If you are still receiving error codes, [contact support](/support/contacting-cloudflare-support/).
-
-
-
-
