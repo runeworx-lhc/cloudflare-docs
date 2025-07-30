@@ -6,7 +6,7 @@ sidebar:
 ---
 
 
-import { GlossaryTooltip, Render, LinkButton } from "~/components"
+import { Render, LinkButton } from "~/components"
 
 This guide will get you started on setting up the Turnstile widget to protect your website from bots while maintaining a seamless user experience.
 
@@ -56,14 +56,9 @@ Follow the steps below to implement Turnstile.
 
 First, you must create a Turnstile widget to get your sitekey and secret key.
 
-Select your preferred method:
+Select your preferred implementation method:
 
-
-<LinkButton href="/">Cloudflare dashboard</LinkButton>
-
-<LinkButton href="/">API</LinkButton>
-
-<LinkButton href="/">Terraform</LinkButton>
+<Render file="implementation-methods" />
 
 ### 2. Embed the widget
 
