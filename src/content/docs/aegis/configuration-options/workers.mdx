@@ -11,6 +11,10 @@ head:
 
 When paired with Aegis, whenever Cloudflare's developer platform needs to access services on your origin, it will use the dedicated IP addresses.
 
-:::note
-For Workers subrequests — meaning requests from one Worker to another — it is expected that different IPs are used. However, requests to external origins made by a Worker invoked via a subrequest will use the dedicated IP addresses.
-:::
+## `fetch`
+
+For Workers subrequests — meaning requests from one Worker to another — it is expected that different IPs are used. However, [`fetch()` requests](/workers/runtime-apis/fetch/) to external origins made by a Worker invoked via a subrequest will use the dedicated IP addresses.
+
+## `connect`
+
+For [`connect()` requests](/workers/runtime-apis/tcp-sockets/) - which create outbound TCP connections from Workers - Aegis IPs are **not** used.
