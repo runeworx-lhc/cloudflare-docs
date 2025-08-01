@@ -37,7 +37,9 @@ export default {
 
 ## Multiple environments with `.env` files
 
-To set different environment variables for each environment, create files named `.env.<environment-name>`.
+You may be using [Cloudflare Environments](/workers/wrangler/environments/) to deploy different versions of a Worker with distinct environment variables. For instance, you may have a production and staging environment.
+
+To set different environment variables for each Cloudflare Environment, create files named `.env.<environment-name>`.
 
 When you use `wrangler <command> --env <environment-name>` or `CLOUDFLARE_ENV=<environment-name> vite dev`, the corresponding environment-specific file will also be loaded and merged with the `.env` file.
 
