@@ -17,11 +17,7 @@ Local Domain Fallback only applies to devices running the WARP client.
 
 Because DNS requests subject to Local Domain Fallback bypass the Gateway resolver, they are not subject to Gateway DNS policies or DNS logging. If you want to route DNS queries to custom resolvers and apply Gateway filtering, use [resolver policies](/cloudflare-one/policies/gateway/resolver-policies/). If both Local Domain Fallback and resolver policies are configured for the same device, Cloudflare will apply client-side Local Domain Fallback rules first.
 
-:::tip[Local Domain Fallback or Gateway Resolver policies?]
-
-If your DNS server can be configured to connect to a Cloudflare <GlossaryTooltip term="on-ramp">on-ramp</GlossaryTooltip>, Cloudflare recommends using Gateway Resolver policies rather than [Local Domain Fallback](/cloudflare-one/policies/gateway/resolver-policies/#local-domain-fallback). Using Gateway Resolver policies will allow you to log your DNS traffic for review.
-
-:::
+<Render file="warp/ldf-best-practice" product="cloudflare-one" />
 
 ### AWS
 
