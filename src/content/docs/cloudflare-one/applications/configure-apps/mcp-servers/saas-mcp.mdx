@@ -1,45 +1,20 @@
 ---
 pcx_content_type: how-to
-title: Authenticate to MCP servers with Cloudflare Access
+title: Secure MCP servers with Access for SaaS
 sidebar:
-  order: 3
-  label: MCP servers
+  order: 1
+  label: Secure MCP servers with Access for SaaS
 ---
 
 import { Render, GlossaryTooltip } from "~/components"
 
 You can secure <GlossaryTooltip term="MCP server">Model Context Protocol (MCP) servers</GlossaryTooltip> by using Cloudflare Access as the Single Sign-On (SSO) provider. When users connect to the remote MCP server using an <GlossaryTooltip term="MCP client">MCP client</GlossaryTooltip>, they will be prompted to log in to your [identity provider](/cloudflare-one/identity/idp-integration/) and are only granted access if they pass your [Access policies](/cloudflare-one/policies/access/#selectors).
 
-Cloudflare Access can also delegate access from any [self-hosted application](/cloudflare-one/applications/configure-apps/self-hosted-public-app/) to the MCP server via <GlossaryTooltip term="OAuth">OAuth</GlossaryTooltip>. The OAuth grant authorizes the MCP server to make requests to your self-hosted applications on behalf of the user, using the user's specific permissions and scopes. For example, your organization may wish to deploy an MCP server that helps employees interact with internal Atlassian applications. You can configure Access policies to ensure that only authorized users can access those applications, either directly or by using AI.
-
-```mermaid
-flowchart LR
-accTitle: Link MCP servers and self-hosted applications in Access
-    subgraph SaaS["Access for SaaS <br> OIDC app"]
-        mcp["MCP server <br> for Atlassian"]
-    end
-
-    subgraph "Access self-hosted app"
-        app1[Jira instance]
-    end
-
-    subgraph "Access self-hosted app"
-        app2[Confluence instance]
-    end
-
-		User --> client["MCP client"]
-    client --> mcp
-    mcp -- Access token --> app1
-		mcp -- Access token --> app2
-		idp[Identity provider] <--> SaaS
-```
-
 ## Prerequisites
 
 - An [identity provider](/cloudflare-one/identity/idp-integration/) configured in Cloudflare Zero Trust
 
-
-## 1. Add a SaaS application to Cloudflare Zero Trust
+## 1. Create an Access for SaaS app
 
 1. In [Zero Trust](https://one.dash.cloudflare.com), go to **Access** > **Applications**.
 2. Select **SaaS**.
@@ -59,4 +34,6 @@ accTitle: Link MCP servers and self-hosted applications in Access
 11. (Optional) In **Experience settings**, configure [App Launcher settings](/cloudflare-one/applications/app-launcher/) by turning on **Enable App in App Launcher** and, in **App Launcher URL**, entering `https://<your-domain>.my.salesforce.com`.
 12. Save the application.
 
-## 2.
+## 2. Configure your MCP server
+
+## Deploy an example MCP server

@@ -1,0 +1,46 @@
+---
+pcx_content_type: how-to
+title: Authenticate MCP server to self-hosted apps
+sidebar:
+  order: 2
+  label: Enable MCP OAuth to self-hosted apps
+---
+
+import { Render, GlossaryTooltip } from "~/components"
+
+Cloudflare Access can delegate access from any [self-hosted application](/cloudflare-one/applications/configure-apps/self-hosted-public-app/) to an [Access for SaaS MCP server](/cloudflare-one/applications/configure-apps/mcp-servers/saas-mcp/) via <GlossaryTooltip term="OAuth">OAuth</GlossaryTooltip>. The OAuth grant authorizes the MCP server to make requests to your self-hosted applications on behalf of the user, using the user's specific permissions and scopes.
+
+For example, your organization may wish to deploy an MCP server that helps employees interact with internal Atlassian applications. You can configure [Access policies](/cloudflare-one/policies/access/#selectors) to ensure that only authorized users can access those applications, either directly or by using an <GlossaryTooltip term="MCP client">MCP client</GlossaryTooltip>.
+
+```mermaid
+flowchart LR
+accTitle: Link MCP servers and self-hosted applications in Access
+    subgraph SaaS["Access for SaaS <br> OIDC app"]
+        mcp["MCP server <br> for Atlassian"]
+    end
+
+    subgraph "Access self-hosted app"
+        app1[Jira instance]
+    end
+
+    subgraph "Access self-hosted app"
+        app2[Confluence instance]
+    end
+
+		User --> client["MCP client"]
+    client --> mcp
+    mcp -- Access token --> app1
+		mcp -- Access token --> app2
+		idp[Identity provider] <--> SaaS
+```
+
+## Prerequisites
+
+## 1. Create an Access policy
+
+## 2. Update the self-hosted app
+
+## 3. Configure the MCP server
+
+## Known limitations
+
