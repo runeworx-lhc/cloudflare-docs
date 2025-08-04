@@ -121,7 +121,7 @@ entries:
 
   - term: MCP client
     general_definition: |-
-      a Model Context Protocol (MCP) client is a user-facing AI tool used to request information and receive responses from an MCP server. Examples of MCP clients include Claude Desktop, Cursor AI, and Windsurf.
+      a Model Context Protocol (MCP) client is a user-facing AI tool that can request information and receive responses from an MCP server. Examples of MCP clients include Claude Desktop, Cursor AI, and Windsurf.
 
   - term: MCP server
     general_definition: |-
