@@ -59,7 +59,7 @@ For example, this configuration blocks every request to the application, except 
 
 Bypass does not enforce any Access security controls and requests are not logged. Bypass policies should be tested before deploying to production. Consider using [Service Auth](/cloudflare-one/policies/access/#service-auth) if you would like to enforce policies and maintain logging without requiring user authentication.
 
-As Bypass does not enforce Access security controls, Bypass policies do not support identity-based [rule types](/cloudflare-one/policies/access/#rule-types). When making Bypass policies, you will not be able to apply certain identity-based [selectors](/cloudflare-one/policies/access/#selectors) (such as email, or IP).
+As Bypass does not enforce Access security controls, Bypass policies do not support identity-based [rule types](/cloudflare-one/policies/access/#rule-types). When making Bypass policies, you will not be able to apply certain identity-based [selectors](/cloudflare-one/policies/access/#selectors) (such as email).
 
 :::
 
@@ -133,7 +133,18 @@ To require only one country and one email ending:
 
 When you add a rule to your policy, you will be asked to specify the criteria/attributes you want users to meet. These attributes are available for all Access application types, including [SaaS](/cloudflare-one/applications/configure-apps/saas-apps/), [self-hosted](/cloudflare-one/applications/configure-apps/self-hosted-public-app/), and [non-HTTP](/cloudflare-one/applications/non-http/) applications.
 
-Identity-based attributes are only checked when a user authenticates to Access. Non-identity attributes are polled continuously, meaning they are-evaluated with each new HTTP request for changes during the [user session](/cloudflare-one/identity/users/session-management/). If you have configured [SCIM provisioning](/cloudflare-one/identity/users/scim/), you can force a user to re-attest all attributes with Access whenever you revoke the user in the IdP or update their IdP group membership.
+Identity-based attributes are only checked when a user authenticates to Access. The following selectors are identity-based:
+
+- Emails
+- Emails ending in
+- Login Methods
+- Authentication Method
+- Identity provider group
+- SAML Group
+- OIDC Claim
+- External Evaluation
+
+Non-identity attributes are polled continuously, meaning they are-evaluated with each new HTTP request for changes during the [user session](/cloudflare-one/identity/users/session-management/). If you have configured [SCIM provisioning](/cloudflare-one/identity/users/scim/), you can force a user to re-attest all attributes with Access whenever you revoke the user in the IdP or update their IdP group membership.
 
 | Selector                 | Description                                                                                                                                                                                                                               | Checked at login | Checked continuously<sup>1</sup> |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------- |
