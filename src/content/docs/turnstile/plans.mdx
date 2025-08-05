@@ -1,0 +1,39 @@
+---
+title: Plans
+type: overview
+hideChildren: true
+pcx_content_type: navigation
+sidebar:
+  order: 2
+head:
+  - tag: title
+    content: Cloudflare Turnstile plans
+
+---
+
+import { FeatureTable, Render, Tabs, TabItem } from "~/components"
+
+Cloudflare Turnstile is available on the Free and Enterprise plans. 
+
+- **Free**: Best for personal websites and blogs, small to medium businesses, development and testing environments, and most production applications.
+- **Enterprise**: Best for large enterprises with high-volume traffic, organizations requiring advanced bot detection and device fingerprinting, organizations requiring custom branding, companies with strict compliance requirements, and multi-domain or complex hosting environments.
+
+<FeatureTable id="security.turnstile" />
+
+## Additional features
+
+<Tabs>
+  <TabItem label="Free">
+    - **All widget types**: Managed, Non-interactive, and Invisible
+    - **Unlimited challenges**: No limit on traffic or verification requests
+    - **WCAG 2.1 AA compliance**: Full accessibility support
+    - **Community support**: Access to Cloudflare Community forums
+  </TabItem>
+  <TabItem label="Enterprise">
+    - **Ephemeral ID**: Advanced bot detection using Ephemeral IDs for enhanced security
+    - **Custom branding**: Remove Cloudflare branding and customize widget appearance
+    - **Advanced analytics**: Extended lookback periods and detailed metrics
+    - **Priority support**: Dedicated support channels
+    - **Advanced hostname management**: Flexible hostname configuration options
+  </TabItem>
+</Tabs>

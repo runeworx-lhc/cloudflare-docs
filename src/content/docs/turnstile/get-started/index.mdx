@@ -20,15 +20,27 @@ Before you begin, you must have:
 
 ---
 
-## Implementation
+## Process
+
+Turnstile widgets are the foundation of your bot protection implementation. 
+
+Every widget has:
+
+  - **Sitekey**: Public identifier used in your webpage code
+  - **Secret Key**: Private key used for server-side validation
+  - **Configuration**: Mode, hostnames, appearance settings, and other options
+
+:::note[Important]
+Regardless of how you create and manage your widgets, you will still need to embed them on your webpage and validate tokens on your server.
+:::
 
 Implementing Turnstile involves two essential components that work together:
 
-1. **Client-side**: Embed the widget
+1. **Client-side**: [Embed the widget](/turnstile/get-started/widget-management/client-side-rendering/)
 
     Add the Turnstile widget to your webpage to challenge visitors and generate verification tokens.
 
-2. **Server-side**: Validate the response
+2. **Server-side**: [Validate the response](/turnstile/get-started/widget-management/server-side-validation/)
 
     Verify the tokens on your server using the Siteverify API to ensure they are authentic and have not been tampered with.
 
@@ -36,19 +48,7 @@ Refer to [Implementation path](/turnstile/get-started/#implementation-path) belo
 
 ---
 
-## Key security requirements
-
-Mandatory server-side validation
-
-- It is critical to enforce Turnstile tokens with the Siteverify API. The Turnstile token could be invalid, expired, or already redeemed. Not verifying the token will leave major vulnerabilities in your implementation. You must call Siteverify to complete your Turnstile configuration. Otherwise, it is incomplete and will result in zeroes for token validation when viewing your metrics in [Turnstile Analytics](/turnstile/turnstile-analytics/).
-
-Token lifecycle
-
-- Tokens expire after 300 seconds (5 minutes). Each token can only be validated once. Expired or used tokens must be replaced with fresh challenges.
-
----
-
-## Implementation path
+## Implementation
 
 Follow the steps below to implement Turnstile.
 
@@ -84,3 +84,26 @@ If you are currently using reCAPTCHA, hCaptcha, or another CAPTCHA service, Turn
 
 Refer to [Migration](/turnstile/migration/) for step-by-step migration guidance from other CAPTCHA services.
 
+---
+
+## Security requirements
+
+<Render file="security-requirements" />
+
+---
+
+## Best practices
+
+### Security
+
+- **Protect secret keys**: Never expose secret keys in client-side code.
+- **Rotate keys regularly**: Use API or dashboard to rotate secret keys periodically.
+- **Restrict hostnames**: Only allow widgets on domains you control.
+**Monitor usage**: Use analytics to detect unusual patterns.
+
+### Operational
+
+- **Use descriptive names**: Name widgets based on their purpose, such as "Login Form" or "Contact Page".
+- **Environment separation**: Use different widgets for development, staging, and production.
+- **Documentation**: Keep track of which widgets are used at which locations.
+- **Backup configuration**: Store widget configurations in version control when using Terraform.

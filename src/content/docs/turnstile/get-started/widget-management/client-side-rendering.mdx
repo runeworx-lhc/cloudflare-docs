@@ -2,7 +2,7 @@
 title: Embed the widget
 pcx_content_type: get-started
 sidebar:
-  order: 2
+  order: 3
 ---
 
 import { Render, Tabs, TabItem, Steps, Details } from "~/components";
@@ -410,6 +410,4 @@ For a complete list of configuration options, refer to [Widget configurations](/
 
 ## Security requirements
 
-- Server-side validation is critical. The client-side widget alone does not provide security. You must validate tokens on your server using the Siteverify API. The token could be invalid, forged, expired (tokens expire after 5 minutes), or already redeemed (tokens can only be used once).
-
-- Tokens are created when challenges are completed. Tokens expire after 300 seconds (5 minutes). Each token can only be validated once. By default, expired tokens are automatically refreshed. 
+<Render file="security-requirements" />

@@ -4,32 +4,12 @@ pcx_content_type: get-started
 sidebar:
   order: 1
   label: Overview
+  group:
+    hideIndex: true
 ---
 
-import { Render, LinkButton } from "~/components"
+import { DirectoryListing } from "~/components"
 
-<Render file="widget-management-overview" />
+Refer to the following pages for more information about managing Turnstile widgets:
 
----
-
-## Implementation methods
-
-<Render file="implementation-methods" />
-
----
-
-## Best practices
-
-### Security
-
-- **Protect secret keys**: Never expose secret keys in client-side code.
-- **Rotate keys regularly**: Use API or dashboard to rotate secret keys periodically.
-- **Restrict hostnames**: Only allow widgets on domains you control.
-**Monitor usage**: Use analytics to detect unusual patterns.
-
-### Operational
-
-- **Use descriptive names**: Name widgets based on their purpose, such as "Login Form" or "Contact Page".
-- **Environment separation**: Use different widgets for development, staging, and production.
-- **Documentation**: Keep track of which widgets are used at which locations.
-- **Backup configuration**: Store widget configurations in version control when using Terraform.
+<DirectoryListing />

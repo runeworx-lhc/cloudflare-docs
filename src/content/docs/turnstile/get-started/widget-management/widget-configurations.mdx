@@ -1,6 +1,8 @@
 ---
 title: Widget configurations
 pcx_content_type: reference
+sidebar:
+  order: 5
 ---
 
 import { Render, Tabs, TabItem, Steps } from '~/components';
@@ -378,13 +380,13 @@ Control how Turnstile handles failed challenges.
 Control how Turnstile handles token expiration and interactive timeouts.
 
 - **`refresh-expired`**: Controls behavior when tokens expire (`auto`, `manual`, `never`).
-- **`refresh-timeout`**: Controls behavior when interactive challenges timeout (`auto`, `manual`, `never`)
+- **`refresh-timeout`**: Controls behavior when interactive challenges timeout (`auto`, `manual`, `never`).
 
 #### Benefits
 
 - `auto` refresh provides seamless user experience but uses more resources.
-- `manual` refresh gives users control but requires them to take action
-- `never` refresh requires your application to handle all refresh logic
+- `manual` refresh gives users control but requires them to take action.
+- `never` refresh requires your application to handle all refresh logic.
 
 Different strategies can be used for token expiration versus interactive timeouts based on your user experience requirements.
 
@@ -438,7 +440,8 @@ When enabled, Turnstile automatically creates a hidden `<input>` element with th
 
 #### Form integration benefits
 
-- **Automatic form integration**: This means that the token is included when the form is submitted, requiring no additional JavaScript. - **Custom field names**: This helps avoid conflicts with existing form fields.
+- **Automatic form integration**: This means that the token is included when the form is submitted, requiring no additional JavaScript. 
+- **Custom field names**: This helps avoid conflicts with existing form fields.
 - **Disabled response fields**: This gives you full control over token handling for complex form scenarios.
 
 ```html title="Custom response field name" wrap
