@@ -15,49 +15,20 @@ MCP servers can now request user input during tool execution, enabling interacti
 
 ```ts
 // Request user confirmation via elicitation
-        const confirmation = await this.elicitInput({
-          message: `Are you sure you want to increment the counter by ${amount}?`,
-          requestedSchema: {
-            type: "object",
-            properties: {
-              confirmed: {
-                type: "boolean",
-                title: "Confirm increment",
-                description: "Check to confirm the increment"
-              }
-            },
-            required: ["confirmed"]
-          }
-        });
-
-        if (
-          confirmation.action === "accept" &&
-          confirmation.content?.confirmed
-        ) {
-          this.setState({
-            counter: this.state.counter + amount
-          });
-
-          return {
-            content: [
-              {
-                type: "text",
-                text: `Counter incremented by ${amount}. New value: ${this.state.counter}`
-              }
-            ]
-          };
-        } else {
-          return {
-            content: [
-              {
-                type: "text",
-                text: "Counter increment cancelled."
-              }
-            ]
-          };
-        }
-      }
-    );
+const confirmation = await this.elicitInput({
+	message: `Are you sure you want to increment the counter by ${amount}?`,
+	requestedSchema: {
+		type: "object",
+		properties: {
+			confirmed: {
+				type: "boolean",
+				title: "Confirm increment",
+				description: "Check to confirm the increment",
+			},
+		},
+		required: ["confirmed"],
+	},
+});
 ```
 
 Check out our [demo](https://github.com/whoiskatrin/agents/tree/main/examples/mcp-elicitation-demo) to see elicitation in action.
